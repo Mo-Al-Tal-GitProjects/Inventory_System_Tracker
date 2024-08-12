@@ -5,6 +5,7 @@ import { firestore } from "./firebase";
 import { Box, Typography, Button, Stack, Modal, TextField, IconButton, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { Add, Remove, Search, FilterList } from '@mui/icons-material';
 import { doc, getDoc, deleteDoc, updateDoc, setDoc, collection, getDocs, Timestamp } from "firebase/firestore";  // Import Timestamp
+import CameraCapture from './CameraCapture';
 
 export default function Home() {
   const [inventory, setInventory] = useState([]);
@@ -177,6 +178,24 @@ export default function Home() {
           >
             Add Medication
           </Button>
+          <CameraCapture />
+          <Box display="flex" alignItems="center" mb={2} gap={2}>
+            <TextField 
+              variant="outlined"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <Search />
+                ),
+              }}
+            />
+            <IconButton color="primary" onClick={handleFilterOpen}>
+              <FilterList />
+            </IconButton>
+          </Box>
         </Box>
       </Modal>
 
